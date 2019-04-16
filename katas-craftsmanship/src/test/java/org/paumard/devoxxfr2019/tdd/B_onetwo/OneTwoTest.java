@@ -16,7 +16,9 @@
 
 package org.paumard.devoxxfr2019.tdd.B_onetwo;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,6 +47,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * <ul><code>5 5 5 5 5 5 5 5 5 5 5 5</code> -> <code>nine five three five</code></ul>
  * And of course we would like a second method to do the opposite conversion.
  */
+@FixMethodOrder(MethodSorters.JVM)
 public class OneTwoTest {
 
     @Test
