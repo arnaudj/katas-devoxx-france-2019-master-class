@@ -118,7 +118,7 @@ public class C_Predicates {
     @Test
     public void c_predicate06() {
 
-        Predicate<String> pred = (String s) -> s.length()<4; // TODO
+        Predicate<String> pred = s -> s.length()<4; // TODO
 
         assertTrue(pred.test("abc"));
         assertFalse(pred.test("abcd"));
