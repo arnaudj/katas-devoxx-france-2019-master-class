@@ -19,11 +19,25 @@ package org.paumard.devoxxfr2019.A_lambdas.a_lambdas.util;
 import org.paumard.devoxxfr2019.A_lambdas.a_lambdas.model.Circle;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public interface CircleFactory extends Supplier<Circle> {
 
+    static CircleFactory createFactory(Supplier<Circle> supplier) {
+        return supplier::get;
+    }
+
+    static CircleFactory createFactory(Function<String, Circle> ctor, String color) {
+        return () -> ctor.apply(color);
+    }
+
     default List<Circle> getThree() {
-        return null; // TODO
+        //return List.of(get(), get(), get());
+        return IntStream.range(0, 3)
+                .mapToObj(index -> get())
+                .collect(Collectors.toList());
     }
 }
