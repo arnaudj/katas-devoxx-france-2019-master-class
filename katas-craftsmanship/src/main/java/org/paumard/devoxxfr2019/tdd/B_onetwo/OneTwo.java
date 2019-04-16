@@ -21,13 +21,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class OneTwo {
 
-    static Map digitToWord = new HashMap<String, String>();
+    static Map digitToWord = new HashMap<String, String>();  // use Guava bimap
     static Map word2Digit = new HashMap<String, String>();
+
     static {
         addMapping("1", "one");
         addMapping("2", "two");
@@ -42,25 +42,25 @@ public class OneTwo {
 
     static void addMapping(String a, String b) {
         digitToWord.put(a, b);
-        word2Digit.put(b,a);
+        word2Digit.put(b, a);
     }
 
     public String convertToNames(String in) {
         String[] split = in.split("\\s+");
         return convertNamesStream(split);
-        //return convertNamesForEach(split);
     }
 
-    class WordCount {
+    class WordCount { // Pair
         int count;
         String word;
-        public WordCount(int count, String word) {
+
+        WordCount(int count, String word) {
             this.count = count;
             this.word = word;
         }
     }
 
-    // with sequence compression, uncapped
+    // with sequence compression - TODO handle case should_return_nine_five_three_five_for_5_5_5_5_5_5_5_5_5_5_5_5
     private String convertNamesStream(String[] split) {
         List<String> words = Arrays.asList(split).stream()
                 .map(item -> digitToWord.get(item).toString())
@@ -76,35 +76,21 @@ public class OneTwo {
 
         String word = words.get(0);
         int count = 1;
-        for(int i=1; i<words.size(); i++) {
+        for (int i = 1; i < words.size(); i++) {
             String newWord = words.get(i);
-            if(newWord.equals(word)) {
+            if (newWord.equals(word)) {
                 count++;
                 continue;
             }
 
             wordCounts.add(new WordCount(count, word));
             word = newWord;
-            count=1;
+            count = 1;
         }
 
         wordCounts.add(new WordCount(count, word));
 
         return wordCounts;
-    }
-
-    // naive impl, forEach based
-    private String convertNamesForEach(String[] split) {
-        AtomicInteger count = new AtomicInteger();
-        StringBuilder sb = new StringBuilder();
-        Arrays.asList(split)
-                .forEach(item -> {
-            if(count.getAndIncrement() > 0)
-                sb.append(" ");
-            sb.append("one ");
-            sb.append(digitToWord.get(item));
-        });
-        return sb.toString();
     }
 
     public String convertToFigures(String input) {
