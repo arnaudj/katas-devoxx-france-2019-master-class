@@ -19,6 +19,7 @@ package org.paumard.devoxxfr2019.A_lambdas.a_lambdas;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import static org.junit.Assert.assertFalse;
@@ -36,28 +37,12 @@ public class C_Predicates {
      * Try to write this lambda using a method reference.
      */
     @Test
-    @Ignore
     public void c_predicate01() {
 
-        Predicate<String> pred = null; // TODO
+        Predicate<String> pred = Objects::isNull;
 
         assertTrue(pred.test(null));
         assertFalse(pred.test(""));
-    }
-
-    /**
-     * Write a lambda expression that is a predicate
-     * that tests whether a string is empty.
-     * Try to write this lambda using a method reference.
-     */
-    @Test
-    @Ignore
-    public void c_predicate02() {
-
-        Predicate<String> pred = null; // TODO
-
-        assertTrue(pred.test(""));
-        assertFalse(pred.test("a"));
     }
 
     /**
@@ -66,13 +51,25 @@ public class C_Predicates {
      * for c_predicate01()
      */
     @Test
-    @Ignore
     public void c_predicate03() {
 
-        Predicate<String> pred = null; // TODO
+        Predicate<String> pred = Objects::nonNull; // TODO
 
         assertTrue(pred.test(""));
         assertFalse(pred.test(null));
+    }
+
+    /**
+     * Write a lambda expression that is a predicate
+     * that tests whether a string is empty.
+     * Try to write this lambda using a method reference.
+     */
+    @Test
+    public void c_predicate02() {
+
+        Predicate<String> pred = String::isEmpty;
+        assertTrue(pred.test(""));
+        assertFalse(pred.test("a"));
     }
 
     /**
@@ -81,14 +78,22 @@ public class C_Predicates {
      * for c_predicate01() c_predicate02()
      */
     @Test
-    @Ignore
     public void c_predicate04() {
 
-        Predicate<String> pred = null; // TODO
+        Predicate<String> pred = ((Predicate<String>) Objects::isNull).or(String::isEmpty);
 
         assertTrue(pred.test(""));
         assertTrue(pred.test(null));
         assertFalse(pred.test("Hello"));
+    }
+
+    @Test
+    public void c_predicate05_jdk8() {
+
+        Predicate<String> pred = ((Predicate<String>) Objects::nonNull).and(((Predicate<String>)(String::isEmpty)).negate()); // .not since jdk11
+        assertFalse(pred.test(""));
+        assertFalse(pred.test(null));
+        assertTrue(pred.test("Hello"));
     }
 
     /**
@@ -98,11 +103,9 @@ public class C_Predicates {
      * you wrote for c_predicate04()
      */
     @Test
-    @Ignore
-    public void c_predicate05() {
+    public void c_predicate05_jdk11() {
 
-        Predicate<String> pred = null; // TODO
-
+        Predicate<String> pred = ((Predicate<String>) Objects::nonNull).and(Predicate.not(String::isEmpty)); // .not since jdk11
         assertFalse(pred.test(""));
         assertFalse(pred.test(null));
         assertTrue(pred.test("Hello"));
@@ -113,10 +116,9 @@ public class C_Predicates {
      * that tests whether a string is shorter than four characters.
      */
     @Test
-    @Ignore
     public void c_predicate06() {
 
-        Predicate<String> pred = null; // TODO
+        Predicate<String> pred = (String s) -> s.length()<4; // TODO
 
         assertTrue(pred.test("abc"));
         assertFalse(pred.test("abcd"));
@@ -128,10 +130,10 @@ public class C_Predicates {
      * Try writing it using a method reference.
      */
     @Test
-    @Ignore
     public void c_predicate07() {
 
-        Predicate<String> equalsError = null; // TODO
+//        Predicate<String> equalsError = (String s) -> s != null && s.equals("ERROR"); // TODO
+        Predicate<String> equalsError = ((Predicate<String>) Objects::nonNull).and((String s2) -> s2.equals("ERROR"));
 
         assertFalse(equalsError.test("Hello"));
         assertTrue(equalsError.test("ERROR"));
