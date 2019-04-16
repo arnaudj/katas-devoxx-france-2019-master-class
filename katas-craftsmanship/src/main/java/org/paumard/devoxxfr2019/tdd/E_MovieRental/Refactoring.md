@@ -13,3 +13,6 @@ Luckily, the tests have already been written for you, so all you need to do is t
 1. At this step, you should have a much more clean class, but we are not quite done. Try to refactor the `statement()` method so that it has only one responsibility left.
 1. One last step: what do you think of those three methods that compute the price, the frequent renter points and the statement line of a single rental? Don't you think they belong to the `Rental` class itself? Plus, if you followed those instructions, you may be bothered by the fact that the single rental price is computed twice... Not that bad in this kata, but still a little annoying. It would be so great to add them to the `Rental` class... Too bad our object model is locked in a safe and we only have read access to it... 
 1. How can you add methods on a class you cannot change? Great! But remember: the GoF tells us that we should favor composition over inheritance. So what about doing that? This last step should solve the computation made twice that is still a itch in the back.  
+
+
+Next step: Refactoring book: 1.15. Using the State pattern on movie

@@ -37,14 +37,10 @@ public class Rental {
     }
 
     public double getCharge() {
-        return _tape.movie().getCharge(_daysRented);
+        return tape().movie().getCharge(_daysRented);
     }
 
     public int getFrequentRenterPoints() {
-        // add frequent renter points
-        // add bonus for a two day new release rental
-        if ((tape().movie().priceCode() == Movie.NEW_RELEASE) && daysRented() > 1)
-            return 2;
-        return 1;
+        return tape().movie().getFrequentRenterPoints(_daysRented);
     }
 }
