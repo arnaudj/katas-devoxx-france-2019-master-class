@@ -20,38 +20,46 @@ package org.paumard.devoxxfr2019.tdd.E_MovieRental;
 
 import org.paumard.devoxxfr2019.tdd.E_MovieRental.model.Rental;
 
-import java.util.Enumeration;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Customer {
 
     private String _name;
-    private Vector _rentals = new Vector();
+    private List<Rental> _rentals = new ArrayList<>();
 
     public Customer(String name) {
         _name = name;
     }
 
     public String statement() {
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
-        Enumeration rentals = _rentals.elements();
-        String result = "Rental Record for " + name() + "\n";
-        while (rentals.hasMoreElements()) {
-            Rental rental = (Rental) rentals.nextElement();
-            double thisAmount = rental.getCharge();
-            totalAmount += thisAmount;
-            frequentRenterPoints += rental.getFrequentRenterPoints();
 
-            //show figures for this rental
-            result += "\t" + rental.tape().movie().name() + "\t" + thisAmount + "\n";
+        String result = "Rental Record for " + name() + "\n";
+        for (Rental rental : _rentals) {
+            result += "\t" + rental.tape().movie().name() + "\t" + rental.getCharge() + "\n";
 
         }
         //add footer lines
-        result += "Amount owed is " + totalAmount + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points";
+        result += "Amount owed is " + getTotalCharge() + "\n";
+        result += "You earned " + getTotalFrequentRenterPoints() + " frequent renter points";
         return result;
 
+    }
+
+    private double getTotalCharge() {
+        double totalAmount = 0;
+        for (Rental rental : _rentals) {
+            totalAmount += rental.getCharge();
+        }
+        return totalAmount;
+    }
+
+    private int getTotalFrequentRenterPoints() {
+        int frequentRenterPoints = 0;
+        for (Rental rental : _rentals) {
+            frequentRenterPoints += rental.getFrequentRenterPoints();
+        }
+        return frequentRenterPoints;
     }
 
     private String name() {
@@ -59,6 +67,6 @@ public class Customer {
     }
 
     public void addRental(Rental arg) {
-        _rentals.addElement(arg);
+        _rentals.add(arg);
     }
 }
