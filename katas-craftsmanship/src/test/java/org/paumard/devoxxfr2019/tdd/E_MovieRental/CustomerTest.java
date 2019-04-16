@@ -27,8 +27,7 @@ public class CustomerTest {
     @Test
     public void should_return_empty_statement_when_no_rentals_have_been_made() {
         // Given
-        String name = "Sarah";
-        Customer customer = new Customer(name);
+        Customer customer = new Customer("Sarah");
 
         // When
         String statement = customer.statement();
