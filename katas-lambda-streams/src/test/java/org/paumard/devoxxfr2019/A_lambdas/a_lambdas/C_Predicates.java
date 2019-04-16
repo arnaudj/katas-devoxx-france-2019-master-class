@@ -132,8 +132,7 @@ public class C_Predicates {
     @Test
     public void c_predicate07() {
 
-//        Predicate<String> equalsError = (String s) -> s != null && s.equals("ERROR"); // TODO
-        Predicate<String> equalsError = ((Predicate<String>) Objects::nonNull).and((String s2) -> s2.equals("ERROR"));
+        Predicate<String> equalsError = s -> "ERROR".equals(s);
 
         assertFalse(equalsError.test("Hello"));
         assertTrue(equalsError.test("ERROR"));

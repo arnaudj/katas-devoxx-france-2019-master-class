@@ -19,6 +19,13 @@ package org.paumard.devoxxfr2019.tdd.A_leapyear;
 public class LeapYear {
 
     public boolean isLeapYear(int year) {
-        return false;
+        boolean by4 = dividable(year, 4);
+        boolean by100 = dividable(year, 100);
+        boolean by400 = dividable(year, 400);
+        return by4 && (!by100 || by400);
+    }
+
+    static boolean dividable(int a, int b) {
+        return a%b == 0;
     }
 }
