@@ -18,7 +18,6 @@
 
 package org.paumard.devoxxfr2019.tdd.E_MovieRental;
 
-import org.paumard.devoxxfr2019.tdd.E_MovieRental.model.Movie;
 import org.paumard.devoxxfr2019.tdd.E_MovieRental.model.Rental;
 
 import java.util.Enumeration;
@@ -39,18 +38,13 @@ public class Customer {
         Enumeration rentals = _rentals.elements();
         String result = "Rental Record for " + name() + "\n";
         while (rentals.hasMoreElements()) {
-            Rental each = (Rental) rentals.nextElement();
-            double thisAmount = amountFor(each);
+            Rental rental = (Rental) rentals.nextElement();
+            double thisAmount = rental.getCharge();
             totalAmount += thisAmount;
-
-            // add frequent renter points
-            frequentRenterPoints++;
-            // add bonus for a two day new release rental
-            if ((each.tape().movie().priceCode() == Movie.NEW_RELEASE) && each.daysRented() > 1)
-                frequentRenterPoints++;
+            frequentRenterPoints += rental.getFrequentRenterPoints();
 
             //show figures for this rental
-            result += "\t" + each.tape().movie().name() + "\t" + thisAmount + "\n";
+            result += "\t" + rental.tape().movie().name() + "\t" + thisAmount + "\n";
 
         }
         //add footer lines
@@ -58,28 +52,6 @@ public class Customer {
         result += "You earned " + frequentRenterPoints + " frequent renter points";
         return result;
 
-    }
-
-    private double amountFor(Rental each) {
-        //determine amounts for each line
-        double thisAmount = 0;
-        switch (each.tape().movie().priceCode()) {
-            case Movie.REGULAR:
-                thisAmount += 2;
-                if (each.daysRented() > 2)
-                    thisAmount += (each.daysRented() - 2) * 1.5;
-                break;
-            case Movie.NEW_RELEASE:
-                thisAmount += each.daysRented() * 3;
-                break;
-            case Movie.CHILDRENS:
-                thisAmount += 1.5;
-                if (each.daysRented() > 3)
-                    thisAmount += (each.daysRented() - 3) * 1.5;
-                break;
-
-        }
-        return thisAmount;
     }
 
     private String name() {

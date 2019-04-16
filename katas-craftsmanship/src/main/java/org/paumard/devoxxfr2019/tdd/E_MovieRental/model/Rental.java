@@ -35,4 +35,34 @@ public class Rental {
     public Tape tape() {
         return _tape;
     }
+
+    public double getCharge() {
+        //determine amounts for each line
+        double thisAmount = 0;
+        switch (tape().movie().priceCode()) {
+            case Movie.REGULAR:
+                thisAmount += 2;
+                if (daysRented() > 2)
+                    thisAmount += (daysRented() - 2) * 1.5;
+                break;
+            case Movie.NEW_RELEASE:
+                thisAmount += daysRented() * 3;
+                break;
+            case Movie.CHILDRENS:
+                thisAmount += 1.5;
+                if (daysRented() > 3)
+                    thisAmount += (daysRented() - 3) * 1.5;
+                break;
+
+        }
+        return thisAmount;
+    }
+
+    public int getFrequentRenterPoints() {
+        // add frequent renter points
+        // add bonus for a two day new release rental
+        if ((tape().movie().priceCode() == Movie.NEW_RELEASE) && daysRented() > 1)
+            return 2;
+        return 1;
+    }
 }
