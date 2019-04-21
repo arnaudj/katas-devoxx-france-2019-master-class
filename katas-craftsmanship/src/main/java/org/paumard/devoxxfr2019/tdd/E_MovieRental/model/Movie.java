@@ -18,22 +18,43 @@
 
 package org.paumard.devoxxfr2019.tdd.E_MovieRental.model;
 
+import org.paumard.devoxxfr2019.tdd.E_MovieRental.model.price.ChildrensPrice;
+import org.paumard.devoxxfr2019.tdd.E_MovieRental.model.price.NewReleasePrice;
+import org.paumard.devoxxfr2019.tdd.E_MovieRental.model.price.Price;
+import org.paumard.devoxxfr2019.tdd.E_MovieRental.model.price.RegularPrice;
+
 public class Movie {
 
     public static final int CHILDRENS = 2;
     public static final int REGULAR = 0;
     public static final int NEW_RELEASE = 1;
 
-    private int _priceCode;
+    private Price _price;
     private String _name;
 
     public Movie(String name, int priceCode) {
         _name = name;
-        _priceCode = priceCode;
+        setPriceCode(priceCode);
     }
 
     public int priceCode() {
-        return _priceCode;
+        return _price.getPriceCode();
+    }
+
+    public void setPriceCode(int priceCode) {
+        switch (priceCode) {
+            case Movie.REGULAR:
+                _price = new RegularPrice();
+                break;
+            case Movie.NEW_RELEASE:
+                _price = new NewReleasePrice();
+                break;
+            case Movie.CHILDRENS:
+                _price = new ChildrensPrice();
+                break;
+            default:
+                throw new IllegalArgumentException("Incorrect Price Code");
+        }
     }
 
     public String name() {
