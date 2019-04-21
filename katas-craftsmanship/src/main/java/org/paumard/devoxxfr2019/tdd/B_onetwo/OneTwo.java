@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 public class OneTwo {
 
-    static Map digitToWord = new HashMap<String, String>();  // use Guava bimap
+    static Map digitToWord = new HashMap<String, String>();  // use Guava bimap, or enum
     static Map word2Digit = new HashMap<String, String>();
 
     static {
@@ -60,7 +60,7 @@ public class OneTwo {
         }
     }
 
-    // with sequence compression - TODO handle case should_return_nine_five_three_five_for_5_5_5_5_5_5_5_5_5_5_5_5
+    // with sequence compression
     private String convertNamesStream(String[] split) {
         List<String> words = Arrays.asList(split).stream()
                 .map(item -> digitToWord.get(item).toString())
@@ -78,7 +78,9 @@ public class OneTwo {
         int count = 1;
         for (int i = 1; i < words.size(); i++) {
             String newWord = words.get(i);
-            if (newWord.equals(word)) {
+
+            boolean isSameSequence = newWord.equals(word) && count < 9;
+            if (isSameSequence) {
                 count++;
                 continue;
             }
