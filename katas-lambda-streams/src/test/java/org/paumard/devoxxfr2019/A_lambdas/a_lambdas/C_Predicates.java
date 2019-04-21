@@ -16,7 +16,6 @@
 
 package org.paumard.devoxxfr2019.A_lambdas.a_lambdas;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Objects;
@@ -53,7 +52,7 @@ public class C_Predicates {
     @Test
     public void c_predicate03() {
 
-        Predicate<String> pred = Objects::nonNull; // TODO
+        Predicate<String> pred = Objects::nonNull;
 
         assertTrue(pred.test(""));
         assertFalse(pred.test(null));
@@ -118,7 +117,7 @@ public class C_Predicates {
     @Test
     public void c_predicate06() {
 
-        Predicate<String> pred = s -> s.length()<4; // TODO
+        Predicate<String> pred = s -> s.length()<4;
 
         assertTrue(pred.test("abc"));
         assertFalse(pred.test("abcd"));

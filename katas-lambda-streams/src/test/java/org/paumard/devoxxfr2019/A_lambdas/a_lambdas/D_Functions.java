@@ -16,7 +16,6 @@
 
 package org.paumard.devoxxfr2019.A_lambdas.a_lambdas;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.function.BiFunction;

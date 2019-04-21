@@ -16,7 +16,6 @@
 
 package org.paumard.devoxxfr2019.A_lambdas.a_lambdas;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.*;
@@ -86,7 +85,7 @@ public class B_Consumers {
     @Test
     public void b_consumer04() {
 
-        Consumer<StringBuilder> cons = sbPrepender().andThen(sb -> sb.append(")")); // TODO
+        Consumer<StringBuilder> cons = sbPrepender().andThen(sb -> sb.append(")"));
 
         StringBuilder sb = new StringBuilder("Hello");
         cons.accept(sb);
@@ -102,7 +101,7 @@ public class B_Consumers {
 
         List<String> strings = new ArrayList<>(Arrays.asList("one", "two", "three"));
 
-        BiConsumer<List<String>, String> bicons = (list, item) -> list.add(item); // TODO
+        BiConsumer<List<String>, String> bicons = (list, item) -> list.add(item);
         bicons.accept(strings, "four");
 
         assertThat(strings).containsExactly("one", "two", "three", "four");
@@ -120,7 +119,7 @@ public class B_Consumers {
         map.put(2, "two");
         map.put(3, "three");
 
-        BiConsumer<Integer, String> bicons = (k,v) -> map.put(k,v); // TODO
+        BiConsumer<Integer, String> bicons = (k,v) -> map.put(k,v);
         bicons.accept(4, "four");
 
         assertThat(map).containsKeys(1, 2, 3, 4);
