@@ -19,7 +19,6 @@ package org.paumard.devoxxfr2019.tdd.E_MovieRental;
 import org.junit.Test;
 import org.paumard.devoxxfr2019.tdd.E_MovieRental.model.Movie;
 import org.paumard.devoxxfr2019.tdd.E_MovieRental.model.Rental;
-import org.paumard.devoxxfr2019.tdd.E_MovieRental.model.Tape;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,9 +44,8 @@ public class CustomerTest {
         Customer customer = new Customer(name);
 
         Movie movie = new Movie("Total Recall", Movie.NEW_RELEASE);
-        Tape tape = new Tape("012345", movie);
         int daysRented = 1;
-        Rental rental = new Rental(tape, daysRented);
+        Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
 
         // When
@@ -68,9 +66,8 @@ public class CustomerTest {
         Customer customer = new Customer(name);
 
         Movie movie = new Movie("Star Wars VI", Movie.NEW_RELEASE);
-        Tape tape = new Tape("12345", movie);
         int daysRented = 4;
-        Rental rental = new Rental(tape, daysRented);
+        Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
 
         // When
@@ -90,9 +87,8 @@ public class CustomerTest {
         Customer customer = new Customer(name);
 
         Movie movie = new Movie("Casablanca", Movie.REGULAR);
-        Tape tape = new Tape("123456", movie);
         int daysRented = 1;
-        Rental rental = new Rental(tape, daysRented);
+        Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
 
         // When
@@ -112,9 +108,8 @@ public class CustomerTest {
         Customer customer = new Customer(name);
 
         Movie movie = new Movie("Taxi Driver", Movie.REGULAR);
-        Tape tape = new Tape("123456", movie);
         int daysRented = 2;
-        Rental rental = new Rental(tape, daysRented);
+        Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
 
         // When
@@ -134,9 +129,8 @@ public class CustomerTest {
         Customer customer = new Customer(name);
 
         Movie movie = new Movie("Star Trek 2024", Movie.REGULAR);
-        Tape tape = new Tape("123456", movie);
         int daysRented = 3;
-        Rental rental = new Rental(tape, daysRented);
+        Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
 
         // When
@@ -156,9 +150,8 @@ public class CustomerTest {
         Customer customer = new Customer(name);
 
         Movie movie = new Movie("The Gold Rush", Movie.REGULAR);
-        Tape tape = new Tape("12354", movie);
         int daysRented = 4;
-        Rental rental = new Rental(tape, daysRented);
+        Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
 
         // When
@@ -178,9 +171,8 @@ public class CustomerTest {
         Customer customer = new Customer(name);
 
         Movie movie = new Movie("Frozen", Movie.CHILDRENS);
-        Tape tape = new Tape("456123", movie);
         int daysRented = 4;
-        Rental rental = new Rental(tape, daysRented);
+        Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
 
         // When
@@ -200,9 +192,8 @@ public class CustomerTest {
         Customer customer = new Customer(name);
 
         Movie movie = new Movie("Animalia", Movie.CHILDRENS);
-        Tape tape = new Tape("789456", movie);
         int daysRented = 1;
-        Rental rental = new Rental(tape, daysRented);
+        Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
 
         // When
@@ -224,12 +215,9 @@ public class CustomerTest {
         Movie childrensMovie = new Movie("Star Wars VII", Movie.CHILDRENS);
         Movie regularMovie = new Movie("Casablanca", Movie.REGULAR);
 
-        Tape childrensTape = new Tape("456789", childrensMovie);
-        Tape regularTape = new Tape("789123", regularMovie);
-
         int daysRented = 2;
-        Rental firstRental = new Rental(childrensTape, daysRented);
-        Rental secondRental = new Rental(regularTape, daysRented);
+        Rental firstRental = new Rental(childrensMovie, daysRented);
+        Rental secondRental = new Rental(regularMovie, daysRented);
         customer.addRental(firstRental);
         customer.addRental(secondRental);
 

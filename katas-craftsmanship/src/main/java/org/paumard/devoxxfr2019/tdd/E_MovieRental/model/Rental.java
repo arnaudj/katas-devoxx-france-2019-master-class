@@ -20,11 +20,11 @@ package org.paumard.devoxxfr2019.tdd.E_MovieRental.model;
 
 public class Rental {
 
-    private Tape _tape;
+    private Movie _movie;
     private int _daysRented;
 
-    public Rental(Tape tape, int daysRented) {
-        _tape = tape;
+    public Rental(Movie movie, int daysRented) {
+        _movie = movie;
         _daysRented = daysRented;
     }
 
@@ -32,15 +32,15 @@ public class Rental {
         return _daysRented;
     }
 
-    public Tape tape() {
-        return _tape;
-    }
-
     public double getCharge() {
-        return tape().movie().getCharge(_daysRented);
+        return _movie.getCharge(_daysRented);
     }
 
     public int getFrequentRenterPoints() {
-        return tape().movie().getFrequentRenterPoints(_daysRented);
+        return _movie.getFrequentRenterPoints(_daysRented);
+    }
+
+    public Movie movie() {
+        return _movie;
     }
 }

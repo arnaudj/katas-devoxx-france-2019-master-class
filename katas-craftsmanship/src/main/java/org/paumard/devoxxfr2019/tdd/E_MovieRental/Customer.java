@@ -36,7 +36,7 @@ public class Customer {
 
         String result = "Rental Record for " + name() + "\n";
         for (Rental rental : _rentals) {
-            result += "\t" + rental.tape().movie().name() + "\t" + rental.getCharge() + "\n";
+            result += "\t" + rental.movie().name() + "\t" + rental.getCharge() + "\n";
 
         }
         //add footer lines
