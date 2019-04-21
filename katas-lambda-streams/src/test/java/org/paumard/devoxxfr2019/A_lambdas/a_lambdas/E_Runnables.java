@@ -17,7 +17,6 @@
 package org.paumard.devoxxfr2019.A_lambdas.a_lambdas;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -30,13 +29,14 @@ public class E_Runnables {
      * to the sb variable (a StringBuilder).
      */
     @Test
-    @Ignore
     public void e_runnable01() {
 
         StringBuilder sb = new StringBuilder("abc");
         String suffix = "--";
 
-        Runnable r = null; // TODO
+        Runnable r = () -> {
+            sb.append(suffix);
+        };
 
         r.run();
         r.run();
